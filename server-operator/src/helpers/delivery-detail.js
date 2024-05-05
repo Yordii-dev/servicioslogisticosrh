@@ -1,0 +1,27 @@
+const { pool } = require('../databases/apal.js')
+
+const createManagedDelivery = async (deliveryId, { status, subStatus }) => {
+  let sql = `insert into MANAGED_DELIVERY(status, subStatus, date, deliveryId) 
+  values(
+    '${status}', 
+    '${subStatus}', 
+    NOW(), 
+    ${deliveryId}
+    )`
+  const response = await pool.query(sql)
+
+  return response
+}
+
+const createManagedOrders = async (deliveryId) => {
+  let sql = `insert into MANAGED_ORDERS(date, deliveryId) 
+    values(
+      NOW(), 
+      ${deliveryId}
+    )`
+
+  const response = await pool.query(sql)
+  return response
+}
+
+module.exports = { createManagedDelivery, createManagedOrders }
