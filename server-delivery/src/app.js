@@ -9,6 +9,7 @@ app = https.createServer(
   {
     cert: fs.readFileSync("./servicioslogisticosrh.crt"),
     key: fs.readFileSync("./llave.key"),
+    passphrase: "12345",
   },
   app
 );
