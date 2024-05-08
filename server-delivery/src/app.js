@@ -1,12 +1,22 @@
-const express = require('express')
-const cors = require('cors')
+const express = require("express");
+const fs = require("fs");
+const https = require("https");
+const cors = require("cors");
 
-const app = express()
+const app = express();
 
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+app = https.createServer(
+  {
+    cert: fs.readFileSync("./servicioslogisticosrh.crt"),
+    key: fs.readFileSync("./llave.key"),
+  },
+  app
+);
 
-app.use('/server-delivery', require('./routes/'))
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-module.exports = app
+app.use("/server-delivery", require("./routes/"));
+
+module.exports = app;
