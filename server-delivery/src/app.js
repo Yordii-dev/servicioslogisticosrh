@@ -3,9 +3,9 @@ const fs = require("fs");
 const https = require("https");
 const cors = require("cors");
 
-let app = express();
+const app = express();
 
-app = https.createServer(
+const servidorHTTPS = https.createServer(
   {
     cert: fs.readFileSync("./servicioslogisticosrh.crt"),
     key: fs.readFileSync("./llave.key"),
@@ -20,4 +20,4 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/server-delivery", require("./routes/"));
 
-module.exports = app;
+module.exports = servidorHTTPS;
