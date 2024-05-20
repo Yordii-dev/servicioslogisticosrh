@@ -7,8 +7,8 @@ const app = express();
 
 const servidorHTTPS = https.createServer(
   {
-    cert: fs.readFileSync("./servicioslogisticosrh.crt"),
-    key: fs.readFileSync("./llave.key"),
+    cert: fs.readFileSync("./../crt/servicioslogisticosrh.crt"),
+    key: fs.readFileSync("./../crt/llave.key"),
     passphrase: "12345",
   },
   app
